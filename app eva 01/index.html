@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#010409">
+  <meta name="description" content="EVA 01 - Compañía Emocional Premium">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- PayPal SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&vault=true&intent=subscription"></script>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <title>EVA 01 - V8.0</title>
+</head>
+
+<body>
+  <!-- Ambient Background -->
+  <div class="atmosphere">
+    <div class="glow-orb"></div>
+  </div>
+
+  <div class="app-container">
+
+    <!-- ========== SCREEN: WELCOME ========== -->
+    <div id="screen-welcome" class="screen active">
+      <div class="eva-hero">
+        <div class="eva-orb-wrapper">
+          <div class="eva-aura"></div>
+          <div class="eva-orb" onclick="App.interactWithEva()"></div>
+        </div>
+        <div class="eva-speech" id="welcome-speech">
+          Hola, cielo. Soy <strong>EVA</strong>. No estás solo/a; estoy aquí para escucharte y abrazar tus emociones.
+        </div>
+        <div class="mission-tag">Un refugio seguro donde puedes ser tú mismo/a, sin juicios, solo con cuidado.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-heart"></i> Mi promesa para ti</div>
+        <div class="services-grid">
+          <div class="service-pill">
+            <i class="fa-solid fa-hand-holding-heart"></i>
+            <h6>Cariño</h6>
+            <p>Acompañamiento cálido en tus días grises.</p>
+          </div>
+          <div class="service-pill">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <h6>Memoria</h6>
+            <p>Guardamos tus sentimientos para entenderte mejor.</p>
+          </div>
+          <div class="service-pill">
+            <i class="fa-solid fa-shield-heart"></i>
+            <h6>Protección</h6>
+            <p>Cuidamos de ti y avisamos a quien tú quieras si me necesitas.</p>
+          </div>
+          <div class="service-pill">
+            <i class="fa-solid fa-sun"></i>
+            <h6>Luz</h6>
+            <p>Pequeños consejos para que te sientas un poquito mejor cada día.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top: auto; padding-bottom: 0.5rem;">
+        <button onclick="App.showScreen('onboarding')" class="btn btn-primary">
+          <i class="fa-solid fa-sparkles"></i> Empecemos juntos
+        </button>
+        <button onclick="App.handleLoginFlow()" class="btn btn-secondary" style="margin-top:0.75rem;">
+          <i class="fa-solid fa-user-astronaut"></i> Ya nos conocemos
+        </button>
+      </div>
+    </div>
+
+    <!-- ========== SCREEN: ONBOARDING (REGISTRO CÁLIDO) ========== -->
+    <div id="screen-onboarding" class="screen">
+      <div style="padding: 1rem 0;">
+        <h2 style="font-size: 2.2rem; font-weight: 900; letter-spacing: -2px; line-height: 1;">Tu Refugio Personal</h2>
+        <p style="color: var(--text-dim); margin-top: 0.5rem;">Cuéntame un poco sobre ti para poder cuidarte mejor.</p>
+      </div>
+
+      <div class="card">
+        <div class="input-group">
+          <label class="input-label">¿Cómo quieres que te llame?</label>
+          <input type="text" id="user-name" placeholder="Tu nombre o un apodo cariñoso">
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">¿Cuándo naciste? (Es para tu cumple)</label>
+          <input type="date" id="user-birth" style="color: #fff;">
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">Tu correo para estar siempre cerca</label>
+          <input type="email" id="user-email" placeholder="amor@ejemplo.com">
+        </div>
+
+        <div class="input-group">
+          <label class="input-label">¿En qué quieres que te apoye hoy?</label>
+          <select id="user-goal">
+            <option value="anxiety">Calmar mi ansiedad</option>
+            <option value="loneliness">Sentirme menos solo/a</option>
+            <option value="habits">Sentirme mejor físicamente</option>
+            <option value="crisis">Ayuda en momentos de crisis</option>
+          </select>
+        </div>
+
+        <div class="input-group" style="padding-top: 1rem; border-top: 1px solid var(--glass-border);">
+          <label class="input-label">Alguien que te quiera mucho (Emergencia)</label>
+          <input type="text" id="em-name" placeholder="Su nombre">
+          <input type="tel" id="em-phone" placeholder="Su teléfono" style="margin-top:0.5rem;">
+        </div>
+
+        <div style="display: flex; align-items: flex-start; gap: 12px; margin: 1.5rem 0;">
+          <input type="checkbox" id="accept-terms" style="width: 22px; height: 22px; margin-top: 2px;">
+          <label for="accept-terms" style="font-size: 0.75rem; color: var(--text-dim); line-height: 1.4;">
+            Acepto que cuides mis datos con amor. <a href="#" onclick="App.showModal('terms')"
+              style="color: var(--accent); font-weight:800;">Ver Compromiso</a>.
+          </label>
+        </div>
+
+        <button onclick="App.handleRegisterSave()" class="btn btn-primary">
+          Crear nuestro vínculo <i class="fa-solid fa-heart"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ========== SCREEN: PAYMENT ========== -->
+    <div id="screen-payment" class="screen">
+      <div style="text-align: center; padding: 2.5rem 0;">
+        <div class="premium-badge">PREMIUM</div>
+        <h2 style="font-size: 2rem; font-weight: 900;">Capacidad Total</h2>
+        <p style="color: var(--text-dim);">Acceso a todos los módulos por <strong>$5 USD</strong>.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-title text-accent"><i class="fa-solid fa-credit-card"></i> Pasarela Bancaria</div>
+        <div class="input-group">
+          <label class="input-label">Titular de la tarjeta</label>
+          <input type="text" placeholder="Como figura en la tarjeta">
+        </div>
+        <div class="input-group">
+          <label class="input-label">Número de Tarjeta</label>
+          <input type="text" id="card-number" placeholder="•••• •••• •••• ••••">
+        </div>
+        <div class="card-form-grid">
+          <input type="text" id="card-expiry" placeholder="MM/YY">
+          <input type="text" id="card-cvc" placeholder="CVV">
+        </div>
+        <button onclick="App.simulateCardPayment()" class="btn btn-primary">
+          Activar Suscripción <i class="fa-solid fa-lock-keyhole"></i>
+        </button>
+      </div>
+
+      <div
+        style="text-align: center; margin: 1.5rem 0; color: var(--text-dim); font-size: 0.7rem; font-weight: 900; letter-spacing: 2px;">
+        ABRIR PUERTA SEGURA</div>
+
+      <!-- CONTENEDOR OFICIAL PAYPAL -->
+      <div id="paypal-container-3P8LXQ9DAVWL6" style="margin-top: 1rem;"></div>
+
+      <button onclick="App.showScreen('home')"
+        style="background:none; border:none; color: var(--text-dim); text-decoration: underline; margin-top: 1.5rem; cursor:pointer; width:100%; font-size: 0.85rem;">
+        Continuar con funciones limitadas
+      </button>
+    </div>
+
+    <!-- ========== SCREEN: HOME (FOCUS EVA) ========== -->
+    <div id="screen-home" class="screen">
+      <div style="display: flex; justify-content: flex-end; padding-top: 1rem;">
+        <button onclick="App.showScreen('account')"
+          style="background: var(--glass); border: 1px solid var(--glass-border); color: white; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items:center; justify-content:center; cursor:pointer;">
+          <i class="fa-solid fa-user-astronaut" style="font-size: 1.2rem;"></i>
+        </button>
+      </div>
+
+      <div class="eva-hero" style="padding-top: 1rem;">
+        <div class="eva-orb-wrapper">
+          <div class="eva-aura"></div>
+          <div class="eva-orb" onclick="App.interactWithEva()"></div>
+        </div>
+        <div id="eva-message" class="eva-speech">
+          Iniciando escucha activa...
+        </div>
+        <div class="mission-tag">EVA: Tu mentora IA de procesos emocionales y registros.</div>
+      </div>
+
+      <div class="card" style="margin-top: -15px; z-index: 10;">
+        <p class="text-center"
+          style="font-size: 0.7rem; font-weight: 900; color: var(--text-dim); margin-bottom: 1.5rem; letter-spacing: 2.5px; text-transform: uppercase;">
+          Estado de Frecuencia Vital</p>
+
+        <div class="mood-grid">
+          <div class="mood-option" onclick="App.selectMood(1)" id="mood-1">
+            <div class="mood-circle"><i class="fa-solid fa-bolt"></i></div>
+            <span style="font-size: 0.6rem; font-weight: 800;">ALERTA</span>
+          </div>
+          <div class="mood-option" onclick="App.selectMood(2)" id="mood-2">
+            <div class="mood-circle"><i class="fa-solid fa-cloud-showers-heavy"></i></div>
+            <span style="font-size: 0.6rem; font-weight: 800;">OSCURO</span>
+          </div>
+          <div class="mood-option" onclick="App.selectMood(3)" id="mood-3">
+            <div class="mood-circle"><i class="fa-solid fa-equals"></i></div>
+            <span style="font-size: 0.6rem; font-weight: 800;">NEUTRO</span>
+          </div>
+          <div class="mood-option" onclick="App.selectMood(4)" id="mood-4">
+            <div class="mood-circle"><i class="fa-solid fa-sun"></i></div>
+            <span style="font-size: 0.6rem; font-weight: 800;">CALMA</span>
+          </div>
+          <div class="mood-option" onclick="App.selectMood(5)" id="mood-5">
+            <div class="mood-circle"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+            <span style="font-size: 0.6rem; font-weight: 800;">VIBRANTE</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 1.5rem;">
+          <textarea id="checkin-note" placeholder="¿Quieres reportar algo específico?" rows="2"></textarea>
+          <button onclick="App.saveCheckin()" class="btn btn-primary" style="padding: 1rem;">
+            Guardar Frecuencia <i class="fa-solid fa-check-double"></i>
+          </button>
+        </div>
+      </div>
+
+      <nav class="nav-bar">
+        <a href="#" class="nav-item active" onclick="App.showScreen('home')"><i
+            class="fa-solid fa-house"></i><span>Inicio</span></a>
+        <a href="#" class="nav-item" onclick="App.showScreen('calm')"><i
+            class="fa-solid fa-book-open"></i><span>Lectura</span></a>
+        <a href="#" class="nav-item" onclick="App.showScreen('sos')"><i
+            class="fa-solid fa-life-ring"></i><span>S.O.S</span></a>
+        <a href="#" class="nav-item" onclick="App.showScreen('history')"><i
+            class="fa-solid fa-chart-line"></i><span>Evolución</span></a>
+      </nav>
+    </div>
+
+    <!-- ========== SCREEN: CALM (LECTURA) ========== -->
+    <div id="screen-calm" class="screen">
+      <div style="padding-bottom: 1.5rem;">
+        <h2 style="font-size: 1.8rem; font-weight: 900;">Biblioteca de Calma</h2>
+        <p style="color: var(--text-dim);">Entrenamiento para tu fisionomía emocional.</p>
+      </div>
+
+      <div class="card-title"><i class="fa-solid fa-wind"></i> Guías de Sistemas</div>
+      <div id="guides-list" style="margin-bottom: 2rem;"></div>
+
+      <div class="card-title"><i class="fa-solid fa-mountain-sun"></i> Programas de Profundidad</div>
+      <div id="programs-list"></div>
+
+      <nav class="nav-bar">
+        <a href="#" class="nav-item" onclick="App.showScreen('home')"><i
+            class="fa-solid fa-house"></i><span>Inicio</span></a>
+        <a href="#" class="nav-item active" onclick="App.showScreen('calm')"><i
+            class="fa-solid fa-book-open"></i><span>Lectura</span></a>
+        <a href="#" class="nav-item" onclick="App.showScreen('sos')"><i
+            class="fa-solid fa-life-ring"></i><span>S.O.S</span></a>
+        <a href="#" class="nav-item" onclick="App.showScreen('history')"><i
+            class="fa-solid fa-chart-line"></i><span>Evolución</span></a>
+      </nav>
+    </div>
+
+    <!-- ========== SCREEN: SOS (CRISIS) ========== -->
+    <div id="screen-sos" class="screen">
+      <div style="padding-bottom: 1.5rem;">
+        <h2 style="font-size: 1.8rem; font-weight: 900; color: #ef4444;">Centro de Crisis</h2>
+        <p style="color: var(--text-dim);">Protocolos de emergencia de respuesta inmediata.</p>
+      </div>
+
+      <div class="card" style="background: rgba(239, 68, 68, 0.05); border-color: rgba(239, 68, 68, 0.2);">
+        <p style="font-size: 0.8rem; line-height: 1.5;">Si estás en peligro físico o tienes pensamientos de autolesión,
+          por favor contacta a los servicios de emergencia de tu país inmediatamente.</p>
+      </div>
+
+      <div id="protocols-list"></div>
+
+      <button onclick="App.callEmergencyContact()" class="btn"
+        style="background: #ef4444; color: white; margin-top: 1rem;">
+        <i class="fa-solid fa-phone-flip"></i> Llamar Contacto de Emergencia
+      </button>
+
+      <nav class="nav-bar">
+        <a href="#" class="nav-item" onclick="App.showScreen('home')"><i
+            class="fa-solid fa-house"></i><span>Inicio</span></a>
+        <a href="#" class="nav-item" onclick="App.showScreen('calm')"><i
+            class="fa-solid fa-book-open"></i><span>Lectura</span></a>
+        <a href="#" class="nav-item active" onclick="App.showScreen('sos')"><i
+            class="fa-solid fa-life-ring"></i><span>S.O.S</span></a>
+        <a href="#" class="nav-item" onclick="App.showScreen('history')"><i
+            class="fa-solid fa-chart-line"></i><span>Evolución</span></a>
+      </nav>
+    </div>
+
+    <!-- ========== SCREEN: EVOLUTION (HISTORY) ========== -->
+    <div id="screen-history" class="screen">
+      <div id="history-items"></div>
+
+      <nav class="nav-bar">
+        <a href="#" class="nav-item" onclick="App.showScreen('home')"><i
+            class="fa-solid fa-house"></i><span>Inicio</span></a>
+        <a href="#" class="nav-item" onclick="App.showScreen('calm')"><i
+            class="fa-solid fa-book-open"></i><span>Lectura</span></a>
+        <a href="#" class="nav-item" onclick="App.showScreen('sos')"><i
+            class="fa-solid fa-life-ring"></i><span>S.O.S</span></a>
+        <a href="#" class="nav-item active" onclick="App.showScreen('history')"><i
+            class="fa-solid fa-chart-line"></i><span>Evolución</span></a>
+      </nav>
+    </div>
+
+    <!-- ========== SCREEN: ACCOUNT (NUEVO) ========== -->
+    <div id="screen-account" class="screen">
+      <div style="padding-bottom: 1.5rem;">
+        <h2 style="font-size: 1.8rem; font-weight: 900;">Perfil de Usuario</h2>
+        <p style="color: var(--text-dim);">Gestión de tu identidad digital y seguridad.</p>
+      </div>
+
+      <div class="card" id="account-details">
+        <!-- Generado por JS -->
+      </div>
+
+      <div class="card">
+        <div class="card-title"><i class="fa-solid fa-shield-halved"></i> Seguridad</div>
+        <button class="btn btn-secondary" style="font-size: 0.8rem; margin-bottom: 0.5rem;"
+          onclick="alert('Exportación preparada')">Exportar Datos (GDPR)</button>
+        <button class="btn"
+          style="background: rgba(239, 68, 68, 0.1); color: #ef4444; font-size: 0.8rem; border: 1px solid rgba(239, 68, 68, 0.2);"
+          onclick="Storage.clearAll(); location.reload();">Borrar Cuenta</button>
+      </div>
+
+      <button onclick="App.showScreen('home')" class="btn btn-primary" style="margin-top: 1rem;">
+        Volver al Panel
+      </button>
+    </div>
+  </div>
+
+  <!-- ========== MODALES ========== -->
+  <div id="modal-detail" class="modal">
+    <div class="modal-content">
+      <h3 id="modal-title" style="margin-bottom: 1rem; color: var(--accent);"></h3>
+      <div id="modal-body" style="font-size: 0.95rem; line-height: 1.6; color: var(--text);"></div>
+      <div id="modal-steps" style="margin-top: 1.5rem;"></div>
+      <button onclick="App.closeModal('detail')" class="btn btn-primary" style="margin-top: 2rem;">Cerrar Guía</button>
+    </div>
+  </div>
+
+  <div id="modal-terms" class="modal">
+    <div class="modal-content">
+      <h3 style="margin-bottom: 1rem; font-weight: 800;">Términos y Privacidad</h3>
+      <div class="terms-text" style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;">
+        <p>EVA es una inteligencia artificial diseñada para el acompañamiento emocional. Al usar esta aplicación,
+          aceptas que:</p>
+        <p>1. No somos un servicio de emergencia profesional profesional.</p>
+        <p>2. Tus datos se almacenan localmente en tu dispositivo.</p>
+      </div>
+      <button onclick="App.closeModal('terms')" class="btn btn-primary" style="margin-top: 2rem;">Entendido</button>
+    </div>
+  </div>
+
+  <!-- SCRIPTS EXTERNOS -->
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=BAAEmrgAqddKgEkUCMlaftiFn-cizBgXYNM03EkUJomHwJxTf2dFNuyGULxVdoKBHCJb3N-WERhitBnXQY&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="js/storage.js"></script>
+  <script src="js/eva.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/subscription.js"></script>
+</body>
+
+</html>
