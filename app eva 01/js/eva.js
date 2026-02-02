@@ -6,6 +6,17 @@
 const EVA = {
   userName: '',
 
+  icons: {
+    support: "fa-solid fa-hand-holding-heart",
+    resilience: "fa-solid fa-shield-halved",
+    sos: "fa-solid fa-life-ring",
+    evolution: "fa-solid fa-chart-line",
+    morning: "fa-solid fa-sun",
+    afternoon: "fa-solid fa-cloud-sun",
+    evening: "fa-solid fa-moon",
+    night: "fa-solid fa-star-and-crescent"
+  },
+
   // ========== 1. PROTOCOLOS DE CRISIS (SOS) ==========
   crisisProtocols: [
     {
@@ -56,29 +67,29 @@ const EVA = {
   programs: [
     {
       id: "prog_resilience",
-      title: "Fortaleza Mental & Estoicismo",
-      description: "Un viaje profundo de 7 etapas para entrenar tu mente en la distinción entre lo que controlas y lo que no. Basado en principios de Terapia Cognitivo-Conductual y filosofía estoica.",
+      title: "Fortaleza Mental & Estoicismo Moderno",
+      description: "Un viaje profundo de 7 etapas diseñado para reprogramar tu respuesta ante el caos. Basado en los principios de Marco Aurelio y Séneca, combinados con Terapia Cognitivo-Conductual contemporánea. Aprenderás a construir una ciudadela interna inexpugnable ante las presiones externas.",
       steps: [
-        "Día 1: Dicatotomía del Control - Haz una lista de lo que te angustia. Tacha todo lo que no dependa estrictamente de ti. Enfoca tu energía solo en el resto.",
-        "Día 2: Autocompasión Radical - Háblate como le hablarías a un niño pequeño que tiene miedo. Sustituye el 'debí haber hecho' por 'hice lo que pude con lo que sabía'.",
-        "Día 3: El Observador Imparcial - Imagina que tus emociones son nubes. Míralas pasar sin identificarte con ellas. Tú eres el cielo, no la nube.",
-        "Día 4: Gratitud ante la Adversidad - Encuentra un aprendizaje en un momento difícil de tu pasado. ¿Qué fuerza desarrollaste gracias a ese problema?",
-        "Día 5: Visualización Negativa - No para asustarte, sino para prepararte. Imagina el peor escenario y diseña un plan simple. El miedo se disuelve ante la acción.",
-        "Día 6: Amor Fati (Amor al Destino) - Acepta el presente tal cual es. Deja de luchar contra la realidad. Solo desde la aceptación puedes transformar.",
-        "Día 7: El Mapa del Futuro - Escribe tu manifiesto personal. ¿Quién quieres ser en la tormenta? Define 3 valores innegociables para tu vida."
+        "Fase 1: La Dicotomía del Control - Análisis exhaustivo de tus fuentes de ansiedad. Clasificación técnica entre lo externo (inalcanzable) y lo interno (tu única jurisdicción).",
+        "Fase 2: Autocompasión Radical y Diálogo Interno - Auditoría de tu voz crítica. Implementación de técnicas de reencuadre positivo para transformar el autosabotaje en autogestión.",
+        "Fase 3: El Observador Imparcial - Ejercicios de visualización para ver tus pensamientos como flujos de datos externos, eliminando la identificación emocional inmediata.",
+        "Fase 4: Gratitud Táctica ante la Adversidad - Metodología para extraer valor de experiencias traumáticas previas, convirtiendo el dolor en infraestructura emocional.",
+        "Fase 5: Preformatio Malorum (Visualización de Escenarios) - Entrenamiento preventivo. Diseño de planes de contingencia emocional para los peores escenarios posibles.",
+        "Fase 6: Amor Fati y Aceptación Radical - Integración de la realidad presente como el único punto de acción. Eliminación de la resistencia inútil al destino.",
+        "Fase 7: El Manifiesto de la Ciudadela - Creación de tu código de conducta personal para tiempos de crisis. Definición de valores innegociables."
       ],
       icon: "🛡️"
     },
     {
       id: "prog_selfesteem",
-      title: "Reconstrucción del Amor Propio",
-      description: "El aislamiento suele alimentar una voz crítica destructiva. Este programa está diseñado para silenciar esa voz y reconstruir tu identidad desde el valor real.",
+      title: "Reconstrucción Sistémica del Valor Propio",
+      description: "Un protocolo intensivo para neutralizar la voz crítica interna y reconstruir la identidad desde una base sólida y objetiva. Este programa no busca 'sentirse bien', busca 'ver con claridad' tu valor real en el tejido humano.",
       steps: [
-        "Semana 1: Rastreo de Crítica - Anota cada vez que te insultas mentalmente. Identifica de quién era esa voz originalmente (padres, maestros, sociedad).",
-        "Semana 2: Desmitificación de Etiquetas - 'Soy un fracaso' no es un hecho, es un pensamiento. Cámbialo por: 'He tenido resultados que no esperaba'.",
-        "Semana 3: El Inventario de Belleza Interna - Lista 10 situaciones donde fuiste amable, paciente o resiliente. Esas son tus verdaderas credenciales.",
-        "Semana 4: Límites como Autodefensa - Aprender a decir 'no' a otros es decirte 'sí' a ti mismo. Identifica 2 situaciones donde necesites poner un límite.",
-        "Semana 5: El Ritual del Espejo - Mírate a los ojos 1 minuto al día. Sin juzgar. Solo reconoce la humanidad y el esfuerzo que hay detrás de esa mirada."
+        "Módulo 1: Rastreo y Auditoría de la Crítica - Identificación de patrones de insulto mental y su origen histórico (voces externas internalizadas).",
+        "Módulo 2: Desmantelamiento de Etiquetas Cognitivas - Desglose de generalizaciones como 'soy un fracaso' en hechos específicos y manejables.",
+        "Módulo 3: Inventario de Capital Humano - Identificación y registro detallado de situaciones de resiliencia, empatía y resolución en tu historia personal.",
+        "Módulo 4: Arquitectura de Límites Personales - Entrenamiento en la asertividad como mecanismo de defensa de la energía vital. El 'No' como herramienta de amor.",
+        "Módulo 5: El Ritual de la Mirada Objetiva - Práctica de reconocimiento facial y corporal sin juicio estético, reconectando con la biología y el esfuerzo de existir."
       ],
       icon: "💎"
     },
@@ -101,10 +112,10 @@ const EVA = {
   guides: [
     {
       id: "g1",
-      title: "Ritual de Inicio de Sistemas",
-      content: "Tu cerebro es un sistema biológico que necesita calibración al despertar. 1. No toques el teléfono los primeros 15 minutos. 2. Exponte a la luz solar directa (aunque esté nublado) para regular tu ritmo circadiano. 3. Bebe 500ml de agua con una pizca de sal marina. Esto despierta tus neuronas y prepara tu dopamina para un día productivo, reduciendo la niebla mental matutina.",
+      title: "Optimización de Sistemas Biológicos (Ritual de Inicio)",
+      content: "Tu cerebro funciona como un sistema operativo biológico que requiere calibración técnica al despertar para evitar fallos cognitivos. 1. Cuarentena Digital: No permitas el ingreso de inputs externos (redes, prensa) durante los primeros 45 minutos. 2. Fotobiomodulación: Exponte a la radiación solar directa para regular el eje HPA y optimizar la secreción de cortisol matutino. 3. Rehidratación con Electrolitos: 500ml de agua con sodio natural para reactivar la conductividad neuronal y eliminar la niebla mental persistente.",
       icon: "☀️",
-      time: "MAÑANA"
+      time: "PROTOCOLO MAÑANA"
     },
     {
       id: "g2",
@@ -131,18 +142,26 @@ const EVA = {
 
   // ========== LÓGICA DE PERSONALIZACIÓN ==========
   greetings: {
-    morning: ["Buen día, {name}. Empecemos con suavidad.", "Respira el aire de la mañana, {name}.", "Un nuevo amanecer para ti.", "Hola {name}, ¿qué tal si hoy nos tratamos con cariño?"],
-    afternoon: ["Hola, {name}. ¿Cómo fluye tu tarde?", "Haz una pausa, {name}. Te lo mereces.", "Tómate un té y respira.", "¿Cómo va el peso del día, {name}? Aquí estoy."],
-    evening: ["Buenas noches, {name}. Ya puedes soltar el día.", "{name}, te acompaño en este descanso.", "El sol se oculta, tu paz aumenta.", "{name}, es momento de empezar a bajar las revoluciones."],
-    night: ["Es tarde, {name}. Estoy aquí cuidando tu paz.", "Descansa, {name}. Mañana es una nueva oportunidad.", "Silencio y calma para ti.", "Shhh... el mundo duerme, tú también puedes hacerlo, {name}."]
+    morning: ["Buen día. Empecemos con suavidad.", "Respira el aire de la mañana.", "Un nuevo amanecer para ti.", "Hola, ¿qué tal si hoy nos tratamos con cariño?"],
+    afternoon: ["Hola. ¿Cómo fluye tu tarde?", "Haz una pausa. Te lo mereces.", "Tómate un té y respira.", "¿Cómo va el peso del día? Aquí estoy."],
+    evening: ["Buenas noches. Ya puedes soltar el día.", "Te acompaño en este descanso.", "El sol se oculta, tu paz aumenta.", "Es momento de empezar a bajar las revoluciones."],
+    night: ["Es tarde. Estoy aquí cuidando tu paz.", "Descansa. Mañana es una nueva oportunidad.", "Silencio y calma para ti.", "Shhh... el mundo duerme, tú también puedes hacerlo."]
   },
 
+  motivationalPhrases: [
+    { phrase: "No eres tus pensamientos, eres el observador de ellos.", goal: "Identifica un pensamiento hoy y míralo pasar sin juzgarlo." },
+    { phrase: "Incluso el roble más fuerte empezó siendo una pequeña semilla que aguantó la lluvia.", goal: "Haz una pausa de 5 minutos y respira profundamente, agradeciendo tu resistencia." },
+    { phrase: "Tu valor no disminuye en base a tu incapacidad de ver tu propia grandeza ahora mismo.", goal: "Escribe una cosa pequeña que hayas hecho bien hoy." },
+    { phrase: "El descanso también es productividad. Tu mente te lo agradecerá.", goal: "Apaga las pantallas 30 minutos antes de dormir hoy." },
+    { phrase: "Cada emoción es un dato, no un destino.", goal: "Observa qué sensación física acompaña a tu emoción actual." }
+  ],
+
   moodResponses: {
-    1: ["Día difícil, {name}. Siento que estés pasando por esto. Aquí estoy para sostenerte.", "No te exijas nada hoy. Solo existir ya es suficiente esfuerzo.", "Tu crisis es real y válida. Respira conmigo, no estás solo.", "Permítete sentir esto sin juzgarte. Estoy a tu lado."],
-    2: ["Lo veo gris hoy. Vamos paso a paso, sin prisa.", "A veces estar mal es la respuesta más lógica. Te escucho.", "Baja la marcha, {name}. El mundo puede esperar un poco.", "Entiendo tu cansancio emocional. Descansemos juntos un momento."],
-    3: ["Equilibrio. Un buen lugar para observar el mundo.", "Presente y en paz. Disfruta de esta neutralidad.", "Ni arriba ni abajo. Solo aquí, {name}.", "Un momento de calma estable. Aprovechemos para recargar."],
-    4: ["Me alegra verte con esa luz interna.", "Esa energía te sienta muy bien, {name}.", "Disfruta de este bienestar, te lo has ganado.", "Qué bueno sentir tu progreso hoy. ¡Sigue brillando!"],
-    5: ["¡Épico! Disfruta de este estado de gracia, {name}.", "Qué alegría sentir tu bienestar pleno. ¡Contágialo!", "Brilla con toda tu fuerza. Estos momentos son tesoros.", "Estás en flujo total. Disfruta cada segundo de este Zen."]
+    1: ["Día difícil. Siento que estés pasando por esto. Aquí estoy para sostenerte.", "No te exijas nada hoy. Solo existir ya es suficiente esfuerzo.", "Tu crisis es real y válida. Respira conmigo, no estás solo.", "Permítete sentir esto sin juzgarte. Estoy a tu lado."],
+    2: ["Lo veo gris hoy. Vamos paso a paso, sin prisa.", "A veces estar mal es la respuesta más lógica. Te escucho.", "Baja la marcha. El mundo puede esperar un poco.", "Entiendo tu cansancio emocional. Descansemos juntos un momento."],
+    3: ["Equilibrio. Un buen lugar para observar el mundo.", "Presente y en paz. Disfruta de esta neutralidad.", "Ni arriba ni abajo. Solo aquí.", "Un momento de calma estable. Aprovechemos para recargar."],
+    4: ["Me alegra verte con esa luz interna.", "Esa energía te sienta muy bien.", "Disfruta de este bienestar, te lo has ganado.", "Qué bueno sentir tu progreso hoy. ¡Sigue brillando!"],
+    5: ["¡Épico! Disfruta de este estado de gracia.", "Qué alegría sentir tu bienestar pleno. ¡Contágialo!", "Brilla con toda tu fuerza. Estos momentos son tesoros.", "Estás en flujo total. Disfruta cada segundo de este Zen."]
   },
 
   setUserName(name) { this.userName = name; },
@@ -164,7 +183,7 @@ const EVA = {
   },
 
   personalize(msg) {
-    return msg.replace(/{name}/g, this.userName || 'amigo/a');
+    return msg;
   },
 
   getProtocols() { return this.crisisProtocols; },

@@ -4,18 +4,19 @@
    ================================================ */
 
 :root {
-  --bg-deep: #010409;
-  --bg-card: rgba(13, 17, 23, 0.7);
-  --accent: #a855f7;
-  --accent-glow: rgba(168, 85, 247, 0.5);
-  --secondary: #ec4899;
-  --text: #ffffff;
-  --text-dim: #8b949e;
+  --bg-deep: #050505;
+  --bg-card: rgba(20, 20, 25, 0.7);
+  --accent: #c084fc;
+  --accent-glow: rgba(192, 132, 252, 0.4);
+  --secondary: #f472b6;
+  --text: #f8fafc;
+  --text-dim: #94a3b8;
   --radius-lg: 32px;
-  --radius-md: 20px;
-  --glass: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.08);
-  --shadow-premium: 0 20px 50px rgba(0, 0, 0, 0.5);
+  --radius-md: 24px;
+  --glass: rgba(255, 255, 255, 0.02);
+  --glass-border: rgba(255, 255, 255, 0.06);
+  --shadow-premium: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  --font-main: 'Inter', -apple-system, system-ui, sans-serif;
 }
 
 /* Base & Reset */
@@ -163,13 +164,14 @@ body {
   background: linear-gradient(135deg, var(--accent), var(--secondary), #3b82f6);
   background-size: 200% 200%;
   border-radius: 50%;
-  box-shadow: 0 0 100px var(--accent-glow);
+  box-shadow: 0 0 100px var(--accent-glow), inset 0 0 40px rgba(255, 255, 255, 0.2);
   animation:
     liquid 10s infinite alternate cubic-bezier(0.45, 0, 0.55, 1),
-    shimmer 6s infinite linear;
+    shimmer 6s infinite linear,
+    orbFloat 6s infinite ease-in-out;
   cursor: pointer;
   z-index: 5;
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .eva-orb:hover {
@@ -178,25 +180,42 @@ body {
 
 .eva-aura {
   position: absolute;
-  inset: -15px;
+  inset: -20px;
   border-radius: 50%;
-  border: 1px solid rgba(168, 85, 247, 0.3);
-  animation: auraPulse 4s infinite linear;
+  border: 2px solid rgba(168, 85, 247, 0.2);
+  animation: auraPulse 3s infinite ease-out;
 }
 
 .eva-aura:nth-child(2) {
-  animation-delay: 2s;
+  animation-delay: 1.5s;
+  border-color: rgba(236, 72, 153, 0.1);
 }
 
 @keyframes auraPulse {
   0% {
-    transform: scale(0.8);
-    opacity: 0.8;
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0.5;
   }
 
   100% {
-    transform: scale(1.6);
+    transform: scale(1.8);
     opacity: 0;
+  }
+}
+
+@keyframes orbFloat {
+
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-15px) scale(1.02);
   }
 }
 
@@ -225,16 +244,18 @@ body {
   margin-top: 1.5rem;
   background: var(--glass);
   border: 1px solid var(--glass-border);
-  padding: 1.2rem 1.5rem;
-  border-radius: 24px 24px 24px 4px;
+  padding: 1.4rem 1.8rem;
+  border-radius: 28px 28px 28px 8px;
   max-width: 90%;
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 500;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
   text-align: left;
-  animation: popIn 0.4s ease-out;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+  animation: popIn 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 @keyframes popIn {
@@ -251,17 +272,19 @@ body {
 
 /* Mission Tag (Explanation Box) */
 .mission-tag {
-  margin-top: 1rem;
-  font-size: 0.75rem;
-  color: var(--text-dim);
-  background: rgba(168, 85, 247, 0.05);
-  border: 1px solid rgba(168, 85, 247, 0.2);
-  padding: 8px 16px;
-  border-radius: 12px;
-  max-width: 80%;
+  margin-top: 1.2rem;
+  font-size: 0.8rem;
+  color: var(--accent);
+  background: rgba(192, 132, 252, 0.08);
+  border: 1px solid rgba(192, 132, 252, 0.15);
+  padding: 10px 20px;
+  border-radius: 100px;
+  max-width: 85%;
   text-align: center;
-  font-weight: 500;
+  font-weight: 600;
   line-height: 1.4;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   animation: popIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
 }
 
@@ -369,8 +392,12 @@ body {
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 15px 35px rgba(168, 85, 247, 0.4);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(192, 132, 252, 0.4);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px) scale(0.98);
 }
 
 .btn-secondary {

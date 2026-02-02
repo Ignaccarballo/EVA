@@ -5,10 +5,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="theme-color" content="#010409">
-  <meta name="description" content="EVA 01 - Compañía Emocional Premium">
-
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta name="description"
+    content="EVA 01 - Tu Sistema de Acompañamiento Emocional 24/7. Resiliencia, Calma y Seguridad.">
+  <link rel="manifest" href="manifest.json">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -40,43 +39,49 @@
       <div class="eva-hero">
         <div class="eva-orb-wrapper">
           <div class="eva-aura"></div>
+          <div class="eva-aura"></div>
           <div class="eva-orb" onclick="App.interactWithEva()"></div>
         </div>
         <div class="eva-speech" id="welcome-speech">
-          Hola, cielo. Soy <strong>EVA</strong>. No estás solo/a; estoy aquí para escucharte y abrazar tus emociones.
+          Hola, soy <strong>EVA</strong>. Tu refugio digital diseñado para acompañarte en cada una de tus emociones.
         </div>
-        <div class="mission-tag">Un refugio seguro donde puedes ser tú mismo/a, sin juicios, solo con cuidado.</div>
+        <div class="mission-tag">No tienes que pasar por esto a solas.</div>
       </div>
 
       <div class="card">
-        <div class="card-title"><i class="fa-solid fa-heart"></i> Mi promesa para ti</div>
+        <div class="card-title"><i class="fa-solid fa-star"></i> ¿Qué es EVA?</div>
+        <p style="font-size: 0.9rem; color: var(--text-dim); margin-bottom: 1rem;">
+          EVA es un sistema de acompañamiento emocional 24/7. Te ofrecemos un espacio seguro para expresar lo que
+          sientes y herramientas profesionales para gestionar tu bienestar.
+        </p>
+
         <div class="services-grid">
           <div class="service-pill">
-            <i class="fa-solid fa-hand-holding-heart"></i>
-            <h6>Cariño</h6>
-            <p>Acompañamiento cálido en tus días grises.</p>
+            <i class="fa-solid fa-moon"></i>
+            <h6>Calma 24/7</h6>
+            <p>Acompañamiento constante y escucha activa sin juicios, siempre que lo necesites.</p>
           </div>
           <div class="service-pill">
-            <i class="fa-solid fa-heart-pulse"></i>
-            <h6>Memoria</h6>
-            <p>Guardamos tus sentimientos para entenderte mejor.</p>
+            <i class="fa-solid fa-life-ring"></i>
+            <h6>Guía S.O.S</h6>
+            <p>Protocolos técnicos de respuesta inmediata ante crisis, pánico o desborde emocional.</p>
           </div>
           <div class="service-pill">
-            <i class="fa-solid fa-shield-heart"></i>
-            <h6>Protección</h6>
-            <p>Cuidamos de ti y avisamos a quien tú quieras si me necesitas.</p>
+            <i class="fa-solid fa-brain"></i>
+            <h6>Resiliencia</h6>
+            <p>Programas de entrenamiento mental para fortalecer tu identidad y amor propio.</p>
           </div>
           <div class="service-pill">
-            <i class="fa-solid fa-sun"></i>
-            <h6>Luz</h6>
-            <p>Pequeños consejos para que te sientas un poquito mejor cada día.</p>
+            <i class="fa-solid fa-wave-square"></i>
+            <h6>Evolución</h6>
+            <p>Métricas de tu estado de ánimo para visualizar tu progreso y patrones vitales.</p>
           </div>
         </div>
       </div>
 
-      <div style="margin-top: auto; padding-bottom: 0.5rem;">
-        <button onclick="App.showScreen('onboarding')" class="btn btn-primary">
-          <i class="fa-solid fa-sparkles"></i> Empecemos juntos
+      <div style="margin-top: auto; padding-bottom: 1rem;">
+        <button onclick="App.showScreen('onboarding')" class="btn btn-primary" id="btn-register-main">
+          <i class="fa-solid fa-user-plus"></i> Crear mi cuenta gratuita
         </button>
         <button onclick="App.handleLoginFlow()" class="btn btn-secondary" style="margin-top:0.75rem;">
           <i class="fa-solid fa-user-astronaut"></i> Ya nos conocemos
@@ -303,7 +308,21 @@
 
     <!-- ========== SCREEN: EVOLUTION (HISTORY) ========== -->
     <div id="screen-history" class="screen">
-      <div id="history-items"></div>
+      <div style="padding-bottom: 1.5rem;">
+        <h2 style="font-size: 1.8rem; font-weight: 900;">Tu Evolución</h2>
+        <p style="color: var(--text-dim);">Análisis de tu frecuencia vital en los últimos 30 días.</p>
+      </div>
+
+      <!-- CHART CARD -->
+      <div class="card" style="padding: 1.2rem; min-height: 250px;">
+        <div class="card-title"><i class="fa-solid fa-chart-line"></i> Mapa de Frecuencia</div>
+        <div style="height: 180px; position: relative; width: 100%;">
+          <canvas id="moodChart"></canvas>
+        </div>
+      </div>
+
+      <div class="card-title" style="margin-top: 1rem;"><i class="fa-solid fa-list-ul"></i> Historial Reciente</div>
+      <div id="history-items" style="display: flex; flex-direction: column; gap: 12px;"></div>
 
       <nav class="nav-bar">
         <a href="#" class="nav-item" onclick="App.showScreen('home')"><i
@@ -350,6 +369,24 @@
       <div id="modal-body" style="font-size: 0.95rem; line-height: 1.6; color: var(--text);"></div>
       <div id="modal-steps" style="margin-top: 1.5rem;"></div>
       <button onclick="App.closeModal('detail')" class="btn btn-primary" style="margin-top: 2rem;">Cerrar Guía</button>
+    </div>
+  </div>
+
+  <div id="modal-success" class="modal">
+    <div class="modal-content" style="text-align: center;">
+      <div id="success-icon" style="font-size: 3rem; margin-bottom: 1rem;">✨</div>
+      <h3 id="success-title" style="margin-bottom: 1rem; color: var(--accent); font-weight: 800;"></h3>
+      <p id="success-phrase"
+        style="font-style: italic; font-size: 1.1rem; line-height: 1.6; margin-bottom: 1.5rem; color: var(--text);"></p>
+      <div
+        style="background: rgba(192, 132, 252, 0.1); padding: 1.2rem; border-radius: 18px; border: 1px solid var(--glass-border); margin-bottom: 2rem;">
+        <span
+          style="display: block; font-size: 0.7rem; font-weight: 900; color: var(--accent); letter-spacing: 1px; margin-bottom: 0.5rem; text-transform: uppercase;">Tu
+          Objetivo de Hoy:</span>
+        <p id="success-goal" style="font-size: 0.95rem; font-weight: 600; color: #fff; margin: 0;"></p>
+      </div>
+      <button onclick="App.closeModal('success'); App.showScreen('history');" class="btn btn-primary"
+        style="width: 100%;">¡Acepto el reto! 🚀</button>
     </div>
   </div>
 

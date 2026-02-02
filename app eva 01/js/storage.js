@@ -4,6 +4,20 @@
  */
 
 const Storage = {
+    formatDate(dateStr) {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('es-ES', { day: '2-digit', month: 'short' });
+    },
+
+    formatRelativeDate(dateStr) {
+        const date = new Date(dateStr);
+        const now = new Date();
+        const diffInHours = Math.abs(now - date) / 36e5;
+
+        if (diffInHours < 1) return 'Hace unos momentos';
+        if (diffInHours < 24) return `Hace ${Math.floor(diffInHours)} horas`;
+        return this.formatDate(dateStr);
+    },
     // Claves de almacenamiento
     KEYS: {
         USER: 'eva_user',

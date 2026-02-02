@@ -22,6 +22,9 @@ const App = {
         // Inicializar suscripciones y contenidos
         this.renderAllContent();
         if (window.Subscription) Subscription.init();
+
+        // Verificar inactividad
+        this.checkInactivity();
     },
 
     // ========== FLOW: AUTH & ONBOARDING ==========
@@ -66,7 +69,7 @@ const App = {
         // Efecto visual de "Conexión"
         const welcomeSpeech = document.getElementById('welcome-speech');
         if (welcomeSpeech) {
-            welcomeSpeech.innerHTML = `Nuestro lazo emocional ha comenzado, <strong>${name}</strong>. Preparando tu lugar seguro...`;
+            welcomeSpeech.innerHTML = `Nuestro lazo emocional ha comenzado. Preparando tu lugar seguro...`;
         }
 
         setTimeout(() => {
@@ -88,8 +91,8 @@ const App = {
             <div style="display:flex; align-items:center; gap:15px; margin-bottom: 2rem;">
                 <div style="font-size: 2.5rem; background: var(--accent); width:70px; height:70px; border-radius:50%; display:flex; align-items:center; justify-content:center;">🛸</div>
                 <div>
-                    <h3 style="margin:0;">${user.name}</h3>
-                    <p style="font-size: 0.75rem; color: var(--text-dim); margin:0;">Me alegra mucho tenerte aquí</p>
+                    <h3 style="margin:0;">Perfil EVA</h3>
+                    <p style="font-size: 0.75rem; color: var(--text-dim); margin:0;">Acompañamiento universal activado</p>
                 </div>
             </div>
             
@@ -120,12 +123,27 @@ const App = {
         `;
     },
 
-    callEmergencyContact() {
+    callEmergencyContact(isAuto = false) {
         const em = JSON.parse(localStorage.getItem('eva_emergency') || '{}');
         if (em.phone) {
-            alert(`Iniciando conexión de emergencia con ${em.name} (${em.phone})...\n\nEVA ha enviado tu ubicación y estado actual.`);
-        } else {
+            const reason = isAuto ? "INACTIVIDAD DETECTADA (3 DÍAS)" : "SOLICITUD MANUAL";
+            alert(`[PROTOCOLO DE SEGURIDAD ACTIVADO]\n\nIniciando conexión de emergencia con ${em.name} (${em.phone})...\n\nMOTIVO: ${reason}\n\nEVA ha enviado tu última ubicación conocida y estado emocional.`);
+        } else if (!isAuto) {
             alert("No has configurado un contacto de emergencia aún.");
+        }
+    },
+
+    checkInactivity() {
+        const lastCheckin = Storage.getRecentCheckins(1)[0];
+        if (!lastCheckin) return;
+
+        const lastDate = new Date(lastCheckin.timestamp);
+        const now = new Date();
+        const diffDays = Math.floor((now - lastDate) / (1000 * 60 * 60 * 24));
+
+        if (diffDays >= 3) {
+            console.warn("⚠️ ALERTA: 3 días sin reportes. Activando protocolo de contacto.");
+            this.callEmergencyContact(true);
         }
     },
 
@@ -196,8 +214,15 @@ const App = {
     typeWriter(el, text) {
         if (!el) return;
         el.innerHTML = '';
+        el.style.opacity = '1';
         let i = 0;
-        const speed = 30;
+        const speed = 25;
+
+        // Haptic feedback initial
+        if (window.navigator && window.navigator.vibrate) {
+            window.navigator.vibrate(5);
+        }
+
         function type() {
             if (i < text.length) {
                 el.innerHTML += text.charAt(i);
@@ -243,10 +268,17 @@ const App = {
         const note = document.getElementById('checkin-note').value;
         Storage.saveCheckin(this.currentMood, note);
 
-        const msgEl = document.getElementById('eva-message');
-        this.typeWriter(msgEl, "He guardado tu estado. Analizaré estos patrones para cuidarte mejor.");
+        // Preparar y mostrar el Pop-up de motivación
+        const motivation = EVA.motivationalPhrases[Math.floor(Math.random() * EVA.motivationalPhrases.length)];
 
-        setTimeout(() => this.showScreen('history'), 2000);
+        document.getElementById('success-title').textContent = "¡Registro Guardado!";
+        document.getElementById('success-phrase').textContent = `"${motivation.phrase}"`;
+        document.getElementById('success-goal').textContent = motivation.goal;
+
+        // Efecto haptico al terminar
+        if (window.navigator?.vibrate) window.navigator.vibrate([10, 30, 10]);
+
+        this.showModal('success');
     },
 
     // ========== CONTENT RENDERING ==========
@@ -307,7 +339,7 @@ const App = {
 
     renderHistory() {
         const items = document.getElementById('history-items');
-        const checkins = Storage.getRecentCheckins(12);
+        const checkins = Storage.getRecentCheckins(30);
 
         // Agregar EVA al fondo de evolución si no está
         const screen = document.getElementById('screen-history');
@@ -395,15 +427,15 @@ const App = {
                 labels: labels,
                 datasets: [{
                     data: values,
-                    borderColor: '#a855f7',
-                    borderWidth: 4,
-                    backgroundColor: 'rgba(168, 85, 247, 0.1)',
+                    borderColor: '#c084fc',
+                    borderWidth: 3,
+                    backgroundColor: 'rgba(192, 132, 252, 0.1)',
                     fill: true,
                     tension: 0.4,
-                    pointRadius: 6,
+                    pointRadius: 4,
                     pointBackgroundColor: '#fff',
-                    pointBorderColor: '#a855f7',
-                    pointBorderWidth: 3
+                    pointBorderColor: '#c084fc',
+                    pointBorderWidth: 2
                 }]
             },
             options: {
